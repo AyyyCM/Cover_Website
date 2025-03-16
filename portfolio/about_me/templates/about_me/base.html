@@ -8,6 +8,40 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- DaisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" rel="stylesheet">
+    <style>
+        .celebration-container {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .celebration-active {
+            display: block;
+        }
+        .sparkle {
+            position: absolute;
+            bottom: -20px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: rise 3s ease-out forwards;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="navbar bg-base-100 shadow-sm">
@@ -17,24 +51,17 @@
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li>
-              {% comment %} <details>
-                <summary>Parent</summary>
-                <ul class="p-2">
-                  <li><a>Submenu 1</a></li>
-                  <li><a>Submenu 2</a></li>
-                </ul>
-              </details> {% endcomment %}
-            </li>
-            <li><a>Portfolio</a></li>
+            <li><a href="#projects" >Projects</a></li>
           </ul>
         </div>
         <div class="navbar-end">
-          <a class="btn">Sparkles</a>
+          <button id="sparkleButton" class="btn">Sparkles</button>
         </div>
-      </div>
+    </div>
+    
+    <div id="celebrationContainer" class="celebration-container"></div>
+    
     {% block content %}{% endblock %}
-
     
 </body>
 <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
@@ -70,4 +97,65 @@
       </a>
     </nav>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sparkleButton = document.getElementById('sparkleButton');
+        const celebrationContainer = document.getElementById('celebrationContainer');
+        
+        sparkleButton.addEventListener('click', function() {
+            celebrationContainer.classList.add('celebration-active');
+
+            // Create 100 sparkles
+            for (let i = 0; i < 100; i++) {
+                createSparkle();
+            }
+            
+            // Remove the celebration after 4 seconds
+            setTimeout(() => {
+                celebrationContainer.classList.remove('celebration-active');
+                celebrationContainer.innerHTML = '';
+            }, 4000);
+        });
+        
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            // Random position along the bottom of the screen
+            const posX = Math.random() * window.innerWidth;
+            sparkle.style.left = `${posX}px`;
+            
+            // Random colors - red, green, blue, gold, purple
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFD700', '#8A2BE2'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            sparkle.style.backgroundColor = randomColor;
+            
+            // Random size
+            const size = 5 + Math.random() * 10;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            
+            // Random animation duration
+            const duration = 2 + Math.random() * 3;
+            sparkle.style.animationDuration = `${duration}s`;
+            
+            // Random horizontal movement
+            const horizontalMovement = -50 + Math.random() * 100;
+            sparkle.style.animationName = 'none';
+            
+            // Apply a custom keyframe animation
+            sparkle.animate([
+                { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 100}px) translateX(${horizontalMovement}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+                fill: 'forwards'
+            });
+            
+            celebrationContainer.appendChild(sparkle);
+        }
+    });
+  </script>
 </html>
