@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-theme="lofi">
+<head>
+    <title>My Portfolio</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'about_me/css/style.css' %}">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar-start">
+          <a class="btn btn-ghost text-xl">Alexander Miles</a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li>
+              {% comment %} <details>
+                <summary>Parent</summary>
+                <ul class="p-2">
+                  <li><a>Submenu 1</a></li>
+                  <li><a>Submenu 2</a></li>
+                </ul>
+              </details> {% endcomment %}
+            </li>
+            <li><a>Portfolio</a></li>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          <a class="btn">Sparkles</a>
+        </div>
+      </div>
+    {% block content %}{% endblock %}
+
+    
+</body>
+<footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
+    <aside class="grid-flow-col items-center">
+      <p>Made with 
+        <a href="https://www.djangoproject.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">Django</a>,
+        <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">Tailwind</a>,
+        <a href="https://daisyui.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">DaisyUI</a>
+      </p>
+    </aside>
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/alexander-miles-77a633350/" target="_blank" rel="noopener noreferrer">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          class="fill-current">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+      <!-- LeetCode -->
+      <a href="https://leetcode.com/u/alexandermiles960/" target="_blank" rel="noopener noreferrer">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          class="fill-current">
+          <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.111.744 1.715.744.603 0 1.213-.229 1.714-.744.513-.513.744-1.123.744-1.714 0-.604-.231-1.214-.744-1.714l-2.696-2.693C15.287 3.873 13.586 3 11.801 3s-3.486.873-4.753 2.14L2.71 9.571c-1.268 1.268-1.969 2.969-1.969 4.755s.702 3.487 1.969 4.754l4.366 4.364C8.363 24.713 10.063 26 11.85 26s3.485-1.286 4.753-2.553l2.697-2.608c.514-.514.744-1.123.744-1.714s-.23-1.213-.744-1.714c-.514-.513-1.124-.744-1.714-.744-.59-.001-1.201.231-1.714.744z" />
+        </svg>
+      </a>
+    </nav>
+  </footer>
+</html>
