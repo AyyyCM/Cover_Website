@@ -6,8 +6,65 @@
   <title>Alexander Miles Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+  <title>My Portfolio</title>
+    <link rel="stylesheet" href="about_me/css/style.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" rel="stylesheet">
+    <style>
+        .celebration-container {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .celebration-active {
+            display: block;
+        }
+        .sparkle {
+            position: absolute;
+            bottom: -20px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: rise 3s ease-out forwards;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
+    
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar-start">
+          <a class="btn btn-ghost text-xl">Alexander Miles</a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          <button id="sparkleButton" class="btn">Sparkles</button>
+        </div>
+    </div>
+    
+    <div id="celebrationContainer" class="celebration-container"></div>
   <!-- Hero Section -->
   <div class="hero min-h-screen" style="background-image: url('/static/about_me/images/MonkeRender.jxl');">
     <div class="hero-overlay bg-opacity-60"></div>
@@ -189,4 +246,99 @@
     </div>
   </section>
 </body>
+<footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-4">
+    <aside class="grid-flow-col items-center">
+      <p>Made with 
+        <a href="https://www.djangoproject.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">Django</a>,
+        <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">Tailwind</a>,
+        <a href="https://daisyui.com/" target="_blank" rel="noopener noreferrer" class="link link-hover">DaisyUI</a>
+      </p>
+    </aside>
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/alexander-miles-77a633350/" target="_blank" rel="noopener noreferrer">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          class="fill-current">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+      <!-- LeetCode -->
+      <a href="https://leetcode.com/u/alexandermiles960/" target="_blank" rel="noopener noreferrer">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          class="fill-current">
+          <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.111.744 1.715.744.603 0 1.213-.229 1.714-.744.513-.513.744-1.123.744-1.714 0-.604-.231-1.214-.744-1.714l-2.696-2.693C15.287 3.873 13.586 3 11.801 3s-3.486.873-4.753 2.14L2.71 9.571c-1.268 1.268-1.969 2.969-1.969 4.755s.702 3.487 1.969 4.754l4.366 4.364C8.363 24.713 10.063 26 11.85 26s3.485-1.286 4.753-2.553l2.697-2.608c.514-.514.744-1.123.744-1.714s-.23-1.213-.744-1.714c-.514-.513-1.124-.744-1.714-.744-.59-.001-1.201.231-1.714.744z" />
+        </svg>
+      </a>
+    </nav>
+  </footer>
+
+  
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sparkleButton = document.getElementById('sparkleButton');
+        const celebrationContainer = document.getElementById('celebrationContainer');
+        
+        sparkleButton.addEventListener('click', function() {
+            celebrationContainer.classList.add('celebration-active');
+
+            // Create 100 sparkles
+            for (let i = 0; i < 100; i++) {
+                createSparkle();
+            }
+            
+            // Remove the celebration after 4 seconds
+            setTimeout(() => {
+                celebrationContainer.classList.remove('celebration-active');
+                celebrationContainer.innerHTML = '';
+            }, 4000);
+        });
+        
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            // Random position along the bottom of the screen
+            const posX = Math.random() * window.innerWidth;
+            sparkle.style.left = `${posX}px`;
+            
+            // Random colors - red, green, blue, gold, purple
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFD700', '#8A2BE2'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            sparkle.style.backgroundColor = randomColor;
+            
+            // Random size
+            const size = 5 + Math.random() * 10;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            
+            // Random animation duration
+            const duration = 2 + Math.random() * 3;
+            sparkle.style.animationDuration = `${duration}s`;
+            
+            // Random horizontal movement
+            const horizontalMovement = -50 + Math.random() * 100;
+            sparkle.style.animationName = 'none';
+            
+            // Apply a custom keyframe animation
+            sparkle.animate([
+                { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 100}px) translateX(${horizontalMovement}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+                fill: 'forwards'
+            });
+            
+            celebrationContainer.appendChild(sparkle);
+        }
+    });
+  </script>
